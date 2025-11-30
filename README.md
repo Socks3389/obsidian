@@ -1,1 +1,1 @@
-该仓库用于同步obsidian
+该仓库用于同步{Obsidian}的本地笔记
