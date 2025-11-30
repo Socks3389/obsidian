@@ -1,3 +1,1 @@
-# obsidian
-用于同步本地笔记
-测试
+该仓库用于同步obsidian
