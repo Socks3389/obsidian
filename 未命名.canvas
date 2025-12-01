@@ -3,11 +3,13 @@
 		{"id":"c67e694afc739787","x":-1080,"y":260,"width":50,"height":61,"color":"5","type":"text","text":"**用户**"},
 		{"id":"0268c6ba6446a88a","x":-900,"y":266,"width":158,"height":50,"color":"4","type":"text","text":"verkrons.com"},
 		{"id":"889f98f4a01faf09","x":-600,"y":241,"width":50,"height":100,"color":"4","type":"text","text":" **防火墙**"},
-		{"id":"2a18417045d68ce9","x":-480,"y":266,"width":138,"height":50,"color":"6","type":"text","text":"WebNAT机"},
-		{"id":"28502225251160f8","x":-480,"y":341,"width":160,"height":50,"color":"6","type":"text","text":"MysqlNAT机"}
+		{"id":"28502225251160f8","x":-491,"y":321,"width":160,"height":50,"color":"6","type":"text","text":"MysqlNAT机"},
+		{"id":"2a18417045d68ce9","x":-480,"y":216,"width":138,"height":50,"color":"6","type":"text","text":"WebNAT机"}
 	],
 	"edges":[
 		{"id":"57de009fbba055a4","fromNode":"c67e694afc739787","fromSide":"right","toNode":"0268c6ba6446a88a","toSide":"left"},
-		{"id":"71ef17de256bfbe4","fromNode":"0268c6ba6446a88a","fromSide":"right","toNode":"889f98f4a01faf09","toSide":"left"}
+		{"id":"71ef17de256bfbe4","fromNode":"0268c6ba6446a88a","fromSide":"right","toNode":"889f98f4a01faf09","toSide":"left"},
+		{"id":"4236da9131b973c9","fromNode":"889f98f4a01faf09","fromSide":"right","toNode":"2a18417045d68ce9","toSide":"left"},
+		{"id":"0c61908c64828a83","fromNode":"889f98f4a01faf09","fromSide":"right","toNode":"28502225251160f8","toSide":"left"}
 	]
 }
