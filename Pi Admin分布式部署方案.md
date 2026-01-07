@@ -42,3 +42,61 @@
     - **安全**：在宝塔“安全”页面放行 6379 端口。
 
     - 重启 Redis 服务。
+   
+### 第二步：后端服务器 (Server API)
+
+**目标**：部署 NestJS 后端，连接远程数据库。
+
+1.  **环境准备**：
+
+    - 宝塔 -> **网站** -> **Node项目** -> **Node版本管理器** -> 安装 **Node v20+** (建议 v20 或 v22)。
+
+    - 安装 **PM2** (通常 Node 管理器会自带，或手动 `npm install -g pm2`)。
+
+2.  **部署代码**：
+
+    - 将 `Admin` 文件夹上传到服务器（如 `/www/wwwroot/pi-admin-backend`）。
+
+    - 进入目录，删除 `node_modules` (如果以前有)，重新运行 `npm install`。
+
+3.  **配置环境变量 (.env)**：
+
+    - 修改 `.env` 文件，指向 **Server DB** 的 IP。
+
+    ```env
+
+    DATABASE_URL="mysql://root:DB密码@Server_DB_IP:3306/pi_admin?schema=public"
+
+    REDIS_HOST="Server_DB_IP"
+
+    REDIS_PORT=6379
+
+    REDIS_PASSWORD="Redis密码"
+
+    # 前端域名配置 (用于CORS允许跨域)
+
+    FRONTEND_URL="https://www.example.com"
+
+    # 如果有多个前端域名，用逗号分隔
+
+    EXTRA_ALLOWED_ORIGINS="https://app.example.com,https://m.example.com"
+
+    ```
+
+4.  **数据库同步**：
+
+    - 在终端执行：`npx prisma migrate deploy` (确保表结构同步)。
+
+5.  **启动服务**：
+
+    - 宝塔 -> **网站** -> **Node项目** -> **添加Node项目**。
+
+    - **项目目录**：选择上传的目录。
+
+    - **启动选项**：`npm run start:prod` 或 `dist/src/main.js`。
+
+    - **端口**：3000。
+
+    - **绑定域名**：可以绑定 API 域名 (如 `api.example.com`)。
+
+    - **反向代理**：如果不想直接暴露 3000，可以用 Nginx 反代（宝塔自动配置）。
