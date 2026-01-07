@@ -57,11 +57,11 @@
 
     - 将 `Admin` 文件夹上传到服务器（如 `/www/wwwroot/pi-admin-backend`）。
 
-    - 进入目录，删除 `node_modules` (如果以前有)，重新运行 `npm install`。
+    - 进入目录，删除 `node_modules` (如果以前有)，重新运行 `npm install --production`。
 
 3.  **配置环境变量 (.env)**：
 
-    - 修改 `.env` 文件，指向 **Server DB** 的 IP。
+    - 修改 `.env` 文件，指向 **DB** 的 IP。
 
     ```env
 
