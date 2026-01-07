@@ -123,8 +123,8 @@
     ```nginx
 
     location /api/ {
-        proxy_pass https://api.zhincloud.cn; 
-        proxy_set_header Host api.zhincloud.cn;
+        proxy_pass 后端域名; 
+        proxy_set_header Host 后端域名;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
@@ -132,4 +132,4 @@
 
     ```
 
-    *注意：放在*
+    *注意：如果前端和后端放在同一服务器中，可以将‘’proxy_pass 后端域名; *
