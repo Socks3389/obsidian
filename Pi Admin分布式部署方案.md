@@ -65,22 +65,6 @@
 
     ```env
 
-    DATABASE_URL="mysql://root:DB密码@Server_DB_IP:3306/pi_admin?schema=public"
-
-    REDIS_HOST="Server_DB_IP"
-
-    REDIS_PORT=6379
-
-    REDIS_PASSWORD="Redis密码"
-
-    # 前端域名配置 (用于CORS允许跨域)
-
-    FRONTEND_URL="https://www.example.com"
-
-    # 如果有多个前端域名，用逗号分隔
-
-    EXTRA_ALLOWED_ORIGINS="https://app.example.com,https://m.example.com"
-
     ```
 
 4.  **数据库同步**：
