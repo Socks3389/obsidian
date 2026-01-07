@@ -76,3 +76,68 @@
     - **绑定域名**：可以绑定 API 域名 (如 `api.example.com`)。
 
     - **反向代理**：如果不想直接暴露 3000，可以用 Nginx 反代（宝塔自动配置）。
+
+### 第三步：前端服务器 (Server Web)
+
+**目标**：部署 React 前端，通过 Nginx 转发 API 请求，支持多域名。
+
+1.  **构建前端 (本地或任意服务器)**：
+
+    - 在 `Index` 目录下，确保 `.env.production` 内容如下：
+
+    ```env
+
+    VITE_API_URL=/api  # 关键：使用相对路径，由 Nginx 负责转发
+
+    ```
+    - 执行 `npm run build`，生成 `dist` 目录。
+
+2.  **部署代码**：
+
+    - 将 `dist` 目录内的所有文件上传到 Server Web 的 `/www/wwwroot/pi-admin-frontend`。
+
+3.  **配置 Nginx (宝塔网站)**：
+
+    - 宝塔 -> **网站** -> **PHP/纯静态项目** -> **添加站点**。
+
+    - **域名**：填写所有需要的前端域名（如 `www.example.com`, `app.example.com`, `landing.example.com`）。
+
+    - **根目录**：指向上传的文件夹。
+
+    - **伪静态 (解决路由 404)**：
+
+    ```nginx
+
+    location / {
+
+      try_files $uri $uri/ /index.html;
+
+    }
+
+    ```
+
+    - **反向代理 (关键)**：
+
+    点击 **配置文件** 或 **反向代理**，添加 `/api` 的转发规则，将其指向 **Server API**。
+
+    ```nginx
+
+    # 将 /api 开头的请求转发给后端服务器
+
+    location /api/ {
+
+        # Server API 的内网或公网 IP + 端口
+
+        proxy_pass http://Server_API_IP:3000/api/;
+
+        proxy_set_header Host $host;
+
+        proxy_set_header X-Real-IP $remote_addr;
+
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+    }
+
+    ```
+
+    *注意：如果 Server API 绑定了域名（如 api.example.com），`proxy_pass` 也可以填 `http://api.example.com/api/`。*
